@@ -9,11 +9,7 @@ from PyQt6.QtWidgets import (
     QLabel,
     QLineEdit,
     QMainWindow,
-    QProgressBar,
-    QRadioButton,
-    QSlider,
     QSpinBox,
-    QTimeEdit,
     QVBoxLayout,
     QWidget,
 )
@@ -33,11 +29,7 @@ class MainWindow(QMainWindow):
             QDoubleSpinBox,
             QLabel,
             QLineEdit,
-            QProgressBar,
-            QRadioButton,
-            QSlider,
             QSpinBox,
-            QTimeEdit,
         ]
 
         for w in widgets:
