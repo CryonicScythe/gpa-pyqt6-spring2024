@@ -9,11 +9,10 @@ from PyQt6.QtWidgets import (
     QLineEdit,
     QMainWindow,
     QPushButton,
-    QSlider,
     QSpinBox,
-    QTimeEdit,
     QVBoxLayout,
     QWidget,
+    QHBoxLayout,
 )
 
 
@@ -22,7 +21,27 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Widgets App")
+        self.setWindowTitle("GPA Calculator App")
+
+        # Create layouts
+        main_layout = QHBoxLayout()
+
+        # Create columns
+        left_pane = QVBoxLayout()
+        right_pane = QVBoxLayout()
+
+        # Title label
+        title_label = QLabel("GPA Calculator App")
+        h1_font = title_label.font()
+        h1_font.setPointSize(30)
+        title_label.setFont(h1_font)
+
+        # Results label
+        result_label = QLabel("Result: Your GPA is ")
+        h2_font = result_label.font()
+        h2_font.setPointSize(25)
+        result_label.setFont(h2_font)
+
 
         layout = QVBoxLayout()
         widgets = [
@@ -31,9 +50,7 @@ class MainWindow(QMainWindow):
             QLabel,
             QLineEdit,
             QPushButton,
-            QSlider,
             QSpinBox,
-            QTimeEdit,
         ]
 
         for w in widgets:
