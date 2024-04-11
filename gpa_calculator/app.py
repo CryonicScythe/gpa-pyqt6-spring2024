@@ -12,28 +12,34 @@ from PyQt6.QtWidgets import (
     QSpinBox,
     QVBoxLayout,
     QWidget,
+    QHBoxLayout,
 )
 
 
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QMainWindow):
     def __init__(self):
-        super().__init__()
+        super(MainWindow, self).__init__()
 
-        self.setWindowTitle("Widgets App")
+        self.setWindowTitle("GPA Calculator App")
 
+        # Create layouts
+        main_layout = QHBoxLayout()
         layout = QVBoxLayout()
-        widgets = [
-            QCheckBox,
-            QComboBox,
-            QDoubleSpinBox,
-            QLabel,
-            QLineEdit,
-            QSpinBox,
-        ]
 
-        for w in widgets:
-            layout.addWidget(w())
+
+        # Create 3 columns
+        left_pane = QVBoxLayout()
+        middle_pane = QVBoxLayout()
+        right_pane = QVBoxLayout()
+
+
+        # Labels
+        title_label = QLabel("GPA Calculator App")
+        result_label = QLabel("Result: Your GPA is ")
+
+
+
 
         widget = QWidget()
         widget.setLayout(layout)
