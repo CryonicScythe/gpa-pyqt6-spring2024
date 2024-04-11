@@ -3,52 +3,41 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QApplication,
-    QCheckBox,
     QComboBox,
     QDoubleSpinBox,
     QLabel,
     QLineEdit,
     QMainWindow,
+    QPushButton,
+    QSlider,
     QSpinBox,
+    QTimeEdit,
     QVBoxLayout,
     QWidget,
-    QHBoxLayout,
 )
 
 
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QMainWindow):
     def __init__(self):
-        super(MainWindow, self).__init__()
+        super().__init__()
 
-        self.setWindowTitle("GPA Calculator App")
+        self.setWindowTitle("Widgets App")
 
-        # Create layouts
-        main_layout = QHBoxLayout()
         layout = QVBoxLayout()
+        widgets = [
+            QComboBox,
+            QDoubleSpinBox,
+            QLabel,
+            QLineEdit,
+            QPushButton,
+            QSlider,
+            QSpinBox,
+            QTimeEdit,
+        ]
 
-
-        # Create 3 columns
-        left_pane = QVBoxLayout()
-        middle_pane = QVBoxLayout()
-        right_pane = QVBoxLayout()
-
-
-        # Labels
-        title_label = QLabel("GPA Calculator App")
-        result_label = QLabel("Result: Your GPA is ")
-
-
-        # Add labels to panes
-        middle_pane.addWidget(title_label)
-        left_pane.addWidget(result_label)
-
-
-        # Add panes to the layout
-        main_layout.addLayout(left_pane)
-        main_layout.addLayout(middle_pane)
-        main_layout.addLayout(right_pane)
-
+        for w in widgets:
+            layout.addWidget(w())
 
         widget = QWidget()
         widget.setLayout(layout)
