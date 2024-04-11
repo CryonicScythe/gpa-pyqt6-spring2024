@@ -39,6 +39,15 @@ class MainWindow(QMainWindow):
         result_label = QLabel("Result: Your GPA is ")
 
 
+        # Add labels to panes
+        middle_pane.addWidget(title_label)
+        left_pane.addWidget(result_label)
+
+
+        # Add panes to the layout
+        main_layout.addLayout(left_pane)
+        main_layout.addLayout(middle_pane)
+        main_layout.addLayout(right_pane)
 
 
         widget = QWidget()
