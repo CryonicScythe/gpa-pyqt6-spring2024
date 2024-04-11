@@ -2,24 +2,14 @@ import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
-    QApplication,
-    QComboBox,
-    QDoubleSpinBox,
-    QLabel,
-    QLineEdit,
-    QMainWindow,
-    QPushButton,
-    QSpinBox,
-    QVBoxLayout,
-    QWidget,
-    QHBoxLayout,
+    QApplication, QComboBox, QDoubleSpinBox, QLabel, QLineEdit, QMainWindow, QPushButton, QSpinBox, QVBoxLayout, QWidget, QHBoxLayout,
 )
 
 
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QMainWindow):
     def __init__(self):
-        super().__init__()
+        super(MainWindow, self).__init__()
 
         self.setWindowTitle("GPA Calculator App")
 
@@ -28,6 +18,7 @@ class MainWindow(QMainWindow):
 
         # Create columns
         left_pane = QVBoxLayout()
+        middle_pane = QVBoxLayout()
         right_pane = QVBoxLayout()
 
         # Title label
@@ -41,6 +32,15 @@ class MainWindow(QMainWindow):
         h2_font = result_label.font()
         h2_font.setPointSize(25)
         result_label.setFont(h2_font)
+
+        # Add labels to panes
+        middle_pane.addWidget(title_label)
+        left_pane.addWidget(result_label)
+
+        # Add panes to layout
+        main_layout.addLayout(left_pane)
+        main_layout.addLayout(middle_pane)
+        main_layout.addLayout(right_pane)
 
 
         layout = QVBoxLayout()
