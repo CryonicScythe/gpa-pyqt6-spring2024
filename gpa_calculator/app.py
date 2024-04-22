@@ -2,7 +2,7 @@ import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
-    QApplication, QComboBox, QDoubleSpinBox, QLabel, QLineEdit, QMainWindow, QPushButton, QSpinBox, QVBoxLayout, QWidget, QHBoxLayout,
+    QApplication, QComboBox, QLabel, QLineEdit, QMainWindow, QPushButton, QDoubleSpinBox, QWidget, QHBoxLayout, QGridLayout
 )
 
 
@@ -13,13 +13,10 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("GPA Calculator App")
 
-        # Create layouts
-        main_layout = QHBoxLayout()
 
-        # Create columns
-        left_pane = QVBoxLayout()
-        middle_pane = QVBoxLayout()
-        right_pane = QVBoxLayout()
+        # Create layouts
+        main_layout = QGridLayout()
+
 
         # Title label
         title_label = QLabel("GPA Calculator App")
@@ -27,41 +24,83 @@ class MainWindow(QMainWindow):
         h1_font.setPointSize(30)
         title_label.setFont(h1_font)
 
+
+        # Course labels
+        class_label = QLabel("Class")
+        class_label.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+        credits_label = QLabel("Credits")
+        credits_label.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+        grade_label = QLabel("Grade")
+        grade_label.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+
+
+        # Course widgets
+        self.course1_input = CourseWidget()
+        self.course2_input = CourseWidget()
+        self.course3_input = CourseWidget()
+        self.course4_input = CourseWidget()
+        self.course5_input = CourseWidget()
+        self.course6_input = CourseWidget()
+        self.course7_input = CourseWidget()
+        self.course8_input = CourseWidget()
+
+
         # Results label
         result_label = QLabel("Result: Your GPA is ")
         h2_font = result_label.font()
         h2_font.setPointSize(25)
         result_label.setFont(h2_font)
 
-        # Add labels to panes
-        middle_pane.addWidget(title_label)
-        left_pane.addWidget(result_label)
 
-        # Add panes to layout
-        main_layout.addLayout(left_pane)
-        main_layout.addLayout(middle_pane)
-        main_layout.addLayout(right_pane)
+        # Row, column, row span, column span (0, 0, 1, 5)
+        # Adding labels to layout
+        main_layout.addWidget(title_label, 0, 0, 1, 5)
+        main_layout.addWidget(class_label, 1, 0, 1, 4)
+        main_layout.addWidget(credits_label, 1, 3, 1, 2)
+        main_layout.addWidget(grade_label, 1, 4, 1, 3)
 
 
-        layout = QVBoxLayout()
-        widgets = [
-            QComboBox,
-            QDoubleSpinBox,
-            QLabel,
-            QLineEdit,
-            QPushButton,
-            QSpinBox,
-        ]
+        # Adding courses to layout
+        main_layout.addWidget(self.course1_input, 2, 0, 1, 5)
+        main_layout.addWidget(self.course2_input, 3, 0, 1, 5)
+        main_layout.addWidget(self.course3_input, 4, 0, 1, 5)
+        main_layout.addWidget(self.course4_input, 5, 0, 1, 5)
+        main_layout.addWidget(self.course5_input, 6, 0, 1, 5)
+        main_layout.addWidget(self.course6_input, 7, 0, 1, 5)
+        main_layout.addWidget(self.course7_input, 8, 0, 1, 5)
+        main_layout.addWidget(self.course8_input, 9, 0, 1, 5)
 
-        for w in widgets:
-            layout.addWidget(w())
 
         widget = QWidget()
-        widget.setLayout(layout)
+        widget.setLayout(main_layout)
 
         # Set the central widget of the Window. Widget will expand
         # to take up all the space in the window by default.
         self.setCentralWidget(widget)
+
+
+
+class CourseWidget(QWidget):
+    
+    def __init__(self) -> None:
+        super().__init__()
+        hbox = QHBoxLayout()
+
+        self.coursetitle = QLineEdit()
+        self.coursetitle.setPlaceholderText("Course Title (Optional)")
+
+        self.creditsinput = QDoubleSpinBox()
+        self.creditsinput.setMinimum(0)
+        self.creditsinput.setMaximum(2)
+
+        self.gradeinput = QComboBox()
+        self.gradeinput.addItems(["A", "B", "C", "D", "F"])
+
+        hbox.addWidget(self.coursetitle)
+        hbox.addWidget(self.creditsinput)
+        hbox.addWidget(self.gradeinput)
+
+        self.setLayout(hbox)
 
 
 app = QApplication(sys.argv)
