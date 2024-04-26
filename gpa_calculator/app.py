@@ -58,6 +58,7 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(class_label, 1, 0, 1, 4)
         main_layout.addWidget(credits_label, 1, 3, 1, 2)
         main_layout.addWidget(grade_label, 1, 4, 1, 3)
+        main_layout.addWidget(result_label, 12, 0, 1, 5)
 
 
         # Adding courses to layout
@@ -90,7 +91,7 @@ class CourseWidget(QWidget):
         self.coursetitle.setPlaceholderText("Course Title (Optional)")
 
         self.creditsinput = QDoubleSpinBox()
-        self.creditsinput.setMinimum(0)
+        self.creditsinput.setMinimum(0.5)
         self.creditsinput.setMaximum(2)
 
         self.gradeinput = QComboBox()
