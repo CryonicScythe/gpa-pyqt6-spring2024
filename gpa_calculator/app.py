@@ -45,11 +45,17 @@ class MainWindow(QMainWindow):
         self.course8_input = CourseWidget()
 
 
+        # Calculate GPA and clear grades and credits
+        self.calculate_button = QPushButton("Calculate")
+        self.calculate_button.clicked.connect(self.calculate_gpa)
+        self.clear_button = QPushButton("Clear")
+
+
         # Results label
-        result_label = QLabel("Result: Your GPA is ")
-        h2_font = result_label.font()
+        self.result_label = QLabel("Result: Your GPA is ")
+        h2_font = self.result_label.font()
         h2_font.setPointSize(25)
-        result_label.setFont(h2_font)
+        self.result_label.setFont(h2_font)
 
 
         # Row, column, row span, column span (0, 0, 1, 5)
@@ -58,7 +64,7 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(class_label, 1, 0, 1, 4)
         main_layout.addWidget(credits_label, 1, 3, 1, 2)
         main_layout.addWidget(grade_label, 1, 4, 1, 3)
-        main_layout.addWidget(result_label, 12, 0, 1, 5)
+        main_layout.addWidget(self.result_label, 12, 0, 1, 5)
 
 
         # Adding courses to layout
@@ -72,12 +78,32 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(self.course8_input, 9, 0, 1, 5)
 
 
+        # Adding buttons to layout
+        main_layout.addWidget(self.calculate_button, 10, 1, 2, 2)
+        main_layout.addWidget(self.clear_button, 10, 3, 2, 1)
+
+
         widget = QWidget()
         widget.setLayout(main_layout)
 
         # Set the central widget of the Window. Widget will expand
         # to take up all the space in the window by default.
         self.setCentralWidget(widget)
+
+
+    def calculate_gpa(self):
+        """Calculate GPA"""
+        # Get Credits
+        credits = self.creditsinput.value()
+        print(credits)
+
+        # Get Grade
+        grade = self.gradeinput
+        # Get Score
+        score = credits * grade
+        # Get GPA
+        gpa = score / credits
+        # Display Results
 
 
 
