@@ -91,20 +91,6 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
 
-    def calculate_gpa(self):
-        """Calculate GPA"""
-        # Get Credits
-        credits = self.creditsinput.value()
-        print(credits)
-
-        # Get Grade
-        grade = self.gradeinput
-        # Get Score
-        score = credits * grade
-        # Get GPA
-        gpa = score / credits
-        # Display Results
-
 
 
 class CourseWidget(QWidget):
@@ -128,6 +114,23 @@ class CourseWidget(QWidget):
         hbox.addWidget(self.gradeinput)
 
         self.setLayout(hbox)
+
+
+    def calculate_gpa(self):
+        """Calculate GPA"""
+        # Get Credits
+        credits = self.creditsinput.value()
+        print(credits)
+
+        # Get Grade
+        grade = self.gradeinput
+        
+        # Get Score
+        score = credits * grade
+        # Get GPA
+        gpa = score / credits
+        # Display Results
+
 
 
 app = QApplication(sys.argv)
