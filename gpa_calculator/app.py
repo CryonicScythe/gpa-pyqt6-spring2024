@@ -2,7 +2,8 @@ import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
-    QApplication, QComboBox, QLabel, QLineEdit, QMainWindow, QPushButton, QDoubleSpinBox, QWidget, QHBoxLayout, QGridLayout
+    QApplication, QComboBox, QLabel, QLineEdit, QMainWindow, QPushButton, 
+    QDoubleSpinBox, QWidget, QHBoxLayout, QGridLayout, QVBoxLayout
 )
 
 
@@ -35,14 +36,27 @@ class MainWindow(QMainWindow):
 
 
         # Course widgets
-        self.course1_input = CourseWidget()
-        self.course2_input = CourseWidget()
-        self.course3_input = CourseWidget()
-        self.course4_input = CourseWidget()
-        self.course5_input = CourseWidget()
-        self.course6_input = CourseWidget()
-        self.course7_input = CourseWidget()
-        self.course8_input = CourseWidget()
+        self.course_layout = QVBoxLayout()
+        self.courses = []
+        course1_input = CourseWidget()
+        course2_input = CourseWidget()
+        course3_input = CourseWidget()
+        course4_input = CourseWidget()
+        course5_input = CourseWidget()
+        course6_input = CourseWidget()
+        course7_input = CourseWidget()
+        course8_input = CourseWidget()
+        self.courses.append(course1_input)
+        self.courses.append(course2_input)
+        self.courses.append(course3_input)
+        self.courses.append(course4_input)
+        self.courses.append(course5_input)
+        self.courses.append(course6_input)
+        self.courses.append(course7_input)
+        self.courses.append(course8_input)
+
+        for c in self.courses:
+            self.course_layout.addWidget(c)
 
 
         # Calculate GPA and clear grades and credits
@@ -68,19 +82,12 @@ class MainWindow(QMainWindow):
 
 
         # Adding courses to layout
-        main_layout.addWidget(self.course1_input, 2, 0, 1, 5)
-        main_layout.addWidget(self.course2_input, 3, 0, 1, 5)
-        main_layout.addWidget(self.course3_input, 4, 0, 1, 5)
-        main_layout.addWidget(self.course4_input, 5, 0, 1, 5)
-        main_layout.addWidget(self.course5_input, 6, 0, 1, 5)
-        main_layout.addWidget(self.course6_input, 7, 0, 1, 5)
-        main_layout.addWidget(self.course7_input, 8, 0, 1, 5)
-        main_layout.addWidget(self.course8_input, 9, 0, 1, 5)
+        main_layout.addLayout(self.course_layout, 2, 0, 1, 5)
 
 
         # Adding buttons to layout
-        main_layout.addWidget(self.calculate_button, 10, 1, 2, 2)
-        main_layout.addWidget(self.clear_button, 10, 3, 2, 1)
+        main_layout.addWidget(self.calculate_button, 3, 1, 2, 2)
+        main_layout.addWidget(self.clear_button, 3, 3, 2, 1)
 
 
         widget = QWidget()
@@ -89,6 +96,31 @@ class MainWindow(QMainWindow):
         # Set the central widget of the Window. Widget will expand
         # to take up all the space in the window by default.
         self.setCentralWidget(widget)
+    
+
+    def calculate_gpa(self):
+        """Calculate GPA"""
+        # Get Credits
+        credits = 0
+        for course in self.courses:
+            title = course.coursetitle.text()
+            credits = course.creditsinput.value()
+
+        # Get Grade
+        grade = 0
+        for course in self.courses:
+            title = course.coursetitle.text()
+            grade = course.gradeinput.value()
+
+        # Get Score
+        score = credits * grade
+        print(score)
+
+        # Get GPA
+        gpa = score / credits
+
+        # Display Results
+        self.result_label.setText(f"Result: Your GPA is {gpa}")
 
 
 
@@ -107,7 +139,7 @@ class CourseWidget(QWidget):
         self.creditsinput.setMaximum(2)
 
         self.gradeinput = QComboBox()
-        self.gradeinput.addItems(["A", "B", "C", "D", "F"])
+        self.gradeinput.addItems(["F", "D", "C", "B", "A"])
 
         hbox.addWidget(self.coursetitle)
         hbox.addWidget(self.creditsinput)
@@ -116,20 +148,7 @@ class CourseWidget(QWidget):
         self.setLayout(hbox)
 
 
-    def calculate_gpa(self):
-        """Calculate GPA"""
-        # Get Credits
-        credits = self.creditsinput.value()
-        print(credits)
 
-        # Get Grade
-        grade = self.gradeinput
-        
-        # Get Score
-        score = credits * grade
-        # Get GPA
-        gpa = score / credits
-        # Display Results
 
 
 
