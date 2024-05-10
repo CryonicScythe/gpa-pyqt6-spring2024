@@ -100,24 +100,19 @@ class MainWindow(QMainWindow):
 
     def calculate_gpa(self):
         """Calculate GPA"""
-        # Get Credits
+        # Get Credits and Grade
         credits = 0
-        for course in self.courses:
-            title = course.coursetitle.text()
-            credits = course.creditsinput.value()
-
-        # Get Grade
         grade = 0
         for course in self.courses:
             title = course.coursetitle.text()
-            grade = course.gradeinput.value()
-
-        # Get Score
-        score = credits * grade
-        print(score)
+            credits = course.creditsinput.value()
+            grade = course.gradeinput.currentIndex()
+            score = credits * grade
+            score_points = score_points + score
+            total_credits = total_credits + credits
 
         # Get GPA
-        gpa = score / credits
+        gpa = score_points / total_credits
 
         # Display Results
         self.result_label.setText(f"Result: Your GPA is {gpa}")
