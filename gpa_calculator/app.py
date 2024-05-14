@@ -63,6 +63,7 @@ class MainWindow(QMainWindow):
         self.calculate_button = QPushButton("Calculate")
         self.calculate_button.clicked.connect(self.calculate_gpa)
         self.clear_button = QPushButton("Clear")
+        self.clear_button.clicked.connect(self.clear_all)
 
 
         # Results label
@@ -103,19 +104,32 @@ class MainWindow(QMainWindow):
         # Get Credits and Grade
         credits = 0
         grade = 0
+        score = 0
+        score_points = 0
+        total_credits = 0
         for course in self.courses:
             title = course.coursetitle.text()
-            credits = course.creditsinput.value()
-            grade = course.gradeinput.currentIndex()
-            score = credits * grade
-            score_points = score_points + score
-            total_credits = total_credits + credits
+            title = len(title)
+            if len(title) >= 1
+                credits = course.creditsinput.value()
+                grade = course.gradeinput.currentIndex()
+                score = credits * grade
+                score_points = score_points + score
+                total_credits = total_credits + credits
+            else:
+                pass
 
         # Get GPA
         gpa = score_points / total_credits
+        gpa = ("{:.2f}".format(gpa))
 
         # Display Results
         self.result_label.setText(f"Result: Your GPA is {gpa}")
+
+
+    def clear_all(self):
+        for course in self.courses:
+            course.clear()
 
 
 
