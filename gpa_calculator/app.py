@@ -109,8 +109,8 @@ class MainWindow(QMainWindow):
         total_credits = 0
         for course in self.courses:
             title = course.coursetitle.text()
-            title = len(title)
-            if len(title) >= 1
+            typed_title = 1
+            if len(title) >= typed_title:
                 credits = course.creditsinput.value()
                 grade = course.gradeinput.currentIndex()
                 score = credits * grade
