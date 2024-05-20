@@ -126,11 +126,13 @@ class MainWindow(QMainWindow):
         # Display Results
         self.result_label.setText(f"Result: Your GPA is {gpa}")
 
+    
 
     def clear_all(self):
         for course in self.courses:
-            course.clear()
-
+            course.coursetitle.clear()
+            course.creditsinput.setValue(0.5)
+            course.gradeinput.setCurrentIndex(0)
 
 
 
